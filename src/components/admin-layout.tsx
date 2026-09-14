@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
   FolderTree,
@@ -17,6 +17,7 @@ import {
 import { AdminStoreProvider, useAdminStore } from "@/lib/store-context";
 import { BrandLogo } from "./brand-logo";
 import { MobileNav } from "./mobile-nav";
+import { createClient } from "@/lib/supabase/client";
 
 const navItems = [
   { href: "/admin", label: "Tableau de Bord", icon: LayoutDashboard },
@@ -29,7 +30,21 @@ const navItems = [
 function AdminLayoutInner({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { isStaticMode, setIsStaticMode } = useAdminStore();
+  const router = useRouter();
 
+  async function handleLogout() {
+    const supabase = createClient();
+
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      console.error("Logout error:", error);
+      return;
+    }
+
+    router.replace("/admin/login");
+    router.refresh();
+  }
   return (
     <div className="admin-shell">
       {/* Desktop Sidebar Layout */}
@@ -66,13 +81,14 @@ function AdminLayoutInner({ children }: { children: React.ReactNode }) {
               <Coffee size={15} />
               Admin Guitara
             </span>
-            <Link
-              href="/admin/login"
+            <button
+              type="button"
               className="sidebar-footer-logout"
+              onClick={handleLogout}
               title="Déconnexion"
             >
               <LogOut size={15} />
-            </Link>
+            </button>
           </div>
         </div>
       </aside>
