@@ -14,6 +14,7 @@ export async function proxy(request: NextRequest) {
         getAll() {
           return request.cookies.getAll();
         },
+
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value }) => {
             request.cookies.set(name, value);
@@ -36,14 +37,18 @@ export async function proxy(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const pathname = request.nextUrl.pathname;
+
   const isAdminRoute = pathname === "/admin" || pathname.startsWith("/admin/");
+
   const isLoginRoute = pathname === "/admin/login";
 
   if (isAdminRoute && !isLoginRoute) {
+    // Not authenticated
     if (!user) {
       return NextResponse.redirect(new URL("/admin/login", request.url));
     }
 
+    // Authenticated but not an admin
     const { data: profile } = await supabase
       .from("profiles")
       .select("role")
@@ -59,7 +64,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
-  ],
+  matcher: ["/admin/:path*"],
 };
