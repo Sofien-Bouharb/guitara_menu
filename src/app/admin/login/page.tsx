@@ -2,14 +2,16 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import { LogIn, Sparkles, ArrowRight, ShieldCheck } from "lucide-react";
+import { LogIn, ShieldCheck, Eye, EyeOff, AlertCircle, X } from "lucide-react";
 import { BrandLogo } from "@/components/brand-logo";
 import { createClient } from "@/lib/supabase/client";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("admin@guitara-coffee.tn");
-  const [password, setPassword] = useState("••••••••");
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -27,7 +29,7 @@ export default function LoginPage() {
     });
 
     if (error) {
-      setError(error.message);
+      setError("Adresse email ou mot de passe incorrect.");
       setIsLoading(false);
       return;
     }
@@ -36,70 +38,88 @@ export default function LoginPage() {
     router.refresh();
   }
 
-  function handleDemoAccess() {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      router.push("/admin");
-    }, 200);
-  }
-
   return (
     <main className="login-page">
       <div className="login-card">
-        {/* Brand Header */}
         <div className="login-brand">
           <BrandLogo size="lg" showSubtitle={true} />
+
           <p className="login-brand-desc">
-            Espace d&apos;administration du menu et de la zone de co-working
-            universitaire.
+            Espace d&apos;administration de Guitara.
           </p>
         </div>
 
-        {/* Demo Mode Highlight Banner */}
-        <div className="login-demo-banner">
-          <div className="login-demo-header">
-            <Sparkles size={16} />
-            <span>Mode Aperçu Statique (Prêt pour test UI)</span>
+        {error && (
+          <div className="login-error-popup" role="alert">
+            <div className="login-error-icon">
+              <AlertCircle size={18} />
+            </div>
+
+            <div className="login-error-content">
+              <span className="login-error-title">Échec de connexion</span>
+
+              <span className="login-error-message">{error}</span>
+            </div>
+
+            <button
+              type="button"
+              className="login-error-close"
+              onClick={() => setError(null)}
+              aria-label="Fermer le message d'erreur"
+            >
+              <X size={16} />
+            </button>
           </div>
-          <p className="login-demo-desc">
-            Vous testez actuellement la version statique UI. Cliquez ci-dessous
-            pour entrer directement dans le tableau de bord sans mot de passe.
-          </p>
-        </div>
+        )}
 
-        <div className="login-divider">
-          <div className="login-divider-line" />
-          <span className="login-divider-text">Ou Connexion Supabase</span>
-        </div>
-
-        {/* Login Form */}
         <form className="form" onSubmit={handleLogin}>
-          {error && (
-            <div className="status-message status-message--error">{error}</div>
-          )}
           <div className="form-group">
             <label htmlFor="email">Adresse Email</label>
+
             <input
               id="email"
               type="email"
               className="input"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setError(null);
+              }}
               required
+              autoComplete="email"
             />
           </div>
 
           <div className="form-group">
             <label htmlFor="password">Mot de Passe</label>
-            <input
-              id="password"
-              type="password"
-              className="input"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+
+            <div className="password-input-wrapper">
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                className="input password-input"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setError(null);
+                }}
+                required
+                autoComplete="current-password"
+              />
+
+              <button
+                type="button"
+                className="password-toggle"
+                onClick={() => setShowPassword((visible) => !visible)}
+                aria-label={
+                  showPassword
+                    ? "Masquer le mot de passe"
+                    : "Afficher le mot de passe"
+                }
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
           </div>
 
           <button
@@ -108,14 +128,15 @@ export default function LoginPage() {
             className="btn btn-secondary btn--full"
           >
             <LogIn size={16} />
-            {isLoading ? "Connexion en cours..." : "Se Connecter avec Supabase"}
+
+            {isLoading ? "Connexion en cours..." : "Se Connecter"}
           </button>
         </form>
 
-        {/* Footer Note */}
         <div className="login-footer">
           <ShieldCheck size={14} />
-          <span>Université Co-working Space • Menu Guitara v1.0</span>
+
+          <span>Co-working Space • Guitara Website v1.0</span>
         </div>
       </div>
     </main>

@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { Edit2, Plus, Save, Trash2, X, Sparkles } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 import { StatusMessage } from "@/components/status-message";
@@ -18,7 +18,6 @@ type AnnouncementForm = {
   title: string;
   message: string;
   variant: Announcement["variant"];
-  placement: Announcement["placement"];
   starts_at: string;
   ends_at: string;
   is_active: boolean;
@@ -29,7 +28,6 @@ const emptyForm: AnnouncementForm = {
   title: "",
   message: "",
   variant: "promo",
-  placement: "banner",
   starts_at: "",
   ends_at: "",
   is_active: true,
@@ -45,6 +43,8 @@ export default function AnnouncementsPage() {
 
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const formPanelRef = useRef<HTMLElement | null>(null);
+  const titleInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     async function loadAnnouncements() {
@@ -71,7 +71,6 @@ export default function AnnouncementsPage() {
       title: announcement.title ?? "",
       message: announcement.message,
       variant: announcement.variant,
-      placement: announcement.placement,
       starts_at: announcement.starts_at ?? "",
       ends_at: announcement.ends_at ?? "",
       is_active: announcement.is_active,
@@ -82,6 +81,22 @@ export default function AnnouncementsPage() {
     setSuccess(null);
   }
 
+  function handleNewAnnouncement() {
+    setForm(emptyForm);
+    setError(null);
+    setSuccess(null);
+
+    requestAnimationFrame(() => {
+      formPanelRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+
+      setTimeout(() => {
+        titleInputRef.current?.focus();
+      }, 400);
+    });
+  }
   async function handleSave(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -97,7 +112,7 @@ export default function AnnouncementsPage() {
       title: form.title.trim() || null,
       message: form.message.trim(),
       variant: form.variant,
-      placement: form.placement,
+      placement: "banner" as const,
       starts_at: form.starts_at || null,
       ends_at: form.ends_at || null,
       is_active: form.is_active,
@@ -215,11 +230,7 @@ export default function AnnouncementsPage() {
         action={
           <button
             className="btn btn-primary"
-            onClick={() => {
-              setForm(emptyForm);
-              setError(null);
-              setSuccess(null);
-            }}
+            onClick={handleNewAnnouncement}
             type="button"
           >
             <Plus size={15} />
@@ -229,7 +240,7 @@ export default function AnnouncementsPage() {
       />
 
       <div className="grid grid-split">
-        <section className="panel">
+        <section ref={formPanelRef} className="panel">
           <div className="panel-header">
             <div>
               <h2>Messages ({announcements.length})</h2>
@@ -291,7 +302,7 @@ export default function AnnouncementsPage() {
                   </div>
 
                   <div className="announcement-card-footer">
-                    <span>Format: {ann.placement}</span>
+                    <span>Affichage : Bandeau Top</span>
 
                     <div className="announcement-card-actions">
                       <button
@@ -347,6 +358,7 @@ export default function AnnouncementsPage() {
                 <label htmlFor="title">Titre (Optionnel)</label>
 
                 <input
+                  ref={titleInputRef}
                   id="title"
                   className="input"
                   placeholder="ex: Offre Période d'Examens 🎓"
@@ -400,26 +412,6 @@ export default function AnnouncementsPage() {
                     <option value="warning">Alerte (Orange)</option>
 
                     <option value="success">Succès (Vert)</option>
-                  </select>
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="placement">Affichage</label>
-
-                  <select
-                    id="placement"
-                    className="select"
-                    value={form.placement}
-                    onChange={(e) =>
-                      setForm({
-                        ...form,
-                        placement: e.target.value as Announcement["placement"],
-                      })
-                    }
-                  >
-                    <option value="banner">Bandeau Top</option>
-
-                    <option value="popup">Popup Modal</option>
                   </select>
                 </div>
               </div>

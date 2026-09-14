@@ -21,7 +21,7 @@ export async function createAnnouncement(payload: {
   title: string | null;
   message: string;
   variant: "info" | "promo" | "warning" | "success";
-  placement: "banner" | "popup";
+  placement: "banner";
   starts_at: string | null;
   ends_at: string | null;
   is_active: boolean;
@@ -48,7 +48,7 @@ export async function updateAnnouncement(
     title: string | null;
     message: string;
     variant: "info" | "promo" | "warning" | "success";
-    placement: "banner" | "popup";
+    placement: "banner";
     starts_at: string | null;
     ends_at: string | null;
     is_active: boolean;

@@ -189,38 +189,6 @@ export default function SettingsPage() {
               <div>{message || "Le texte informatif apparaîtra ici..."}</div>
             </div>
           </section>
-
-          <section className="panel info-card">
-            <div className="panel-header">
-              <div>
-                <h2>Informations Espace</h2>
-
-                <p>Repères pour l&apos;équipe.</p>
-              </div>
-            </div>
-
-            <div className="info-rows">
-              <div className="info-row">
-                <span className="info-row-label">
-                  <Wifi size={15} />
-                  Wi-Fi Fibre
-                </span>
-
-                <span className="info-row-value info-row-value--accent">
-                  GUITARA_COWORKING
-                </span>
-              </div>
-
-              <div className="info-row">
-                <span className="info-row-label">
-                  <Clock size={15} />
-                  Horaires
-                </span>
-
-                <span className="info-row-value">08:00 - 22:00</span>
-              </div>
-            </div>
-          </section>
         </div>
       </div>
     </div>

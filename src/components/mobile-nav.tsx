@@ -33,16 +33,6 @@ export function MobileNav() {
         <div className="top-header-left">
           <BrandLogo size="sm" showSubtitle={false} compactMobile={true} />
         </div>
-        <div className="top-header-right">
-          <button
-            onClick={() => setIsStaticMode(!isStaticMode)}
-            className={`mode-toggle-btn ${isStaticMode ? "mode-toggle-btn--static" : "mode-toggle-btn--live"}`}
-            title="Basculer Mode Démo Statique / Mode Supabase"
-          >
-            <Database size={13} />
-            <span>{isStaticMode ? "Statique" : "Live"}</span>
-          </button>
-        </div>
       </header>
 
       {/* FIXED BOTTOM NAVIGATION BAR */}

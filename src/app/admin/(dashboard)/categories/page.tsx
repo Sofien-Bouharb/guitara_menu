@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { Edit2, Plus, Save, Trash2, X, Search } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 import { StatusMessage } from "@/components/status-message";
@@ -41,6 +41,8 @@ export default function CategoriesPage() {
   const [search, setSearch] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const formPanelRef = useRef<HTMLElement | null>(null);
+  const nameInputRef = useRef<HTMLInputElement | null>(null);
   useEffect(() => {
     async function loadCategories() {
       try {
@@ -84,6 +86,23 @@ export default function CategoriesPage() {
     });
     setError(null);
     setSuccess(null);
+  }
+
+  function handleNewCategory() {
+    setForm(emptyForm);
+    setError(null);
+    setSuccess(null);
+
+    requestAnimationFrame(() => {
+      formPanelRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+
+      setTimeout(() => {
+        nameInputRef.current?.focus();
+      }, 400);
+    });
   }
 
   async function handleToggleActive(category: Category) {
@@ -210,11 +229,7 @@ export default function CategoriesPage() {
         action={
           <button
             className="btn btn-primary"
-            onClick={() => {
-              setForm(emptyForm);
-              setError(null);
-              setSuccess(null);
-            }}
+            onClick={handleNewCategory}
             type="button"
           >
             <Plus size={15} />
@@ -225,7 +240,7 @@ export default function CategoriesPage() {
 
       <div className="grid grid-split">
         {/* Left Column: Categories List */}
-        <section className="panel">
+        <section ref={formPanelRef} className="panel">
           <div className="section-header">
             <div>
               <h2 className="section-title">
@@ -355,6 +370,7 @@ export default function CategoriesPage() {
             <div className="form-group">
               <label htmlFor="name">Nom de la Catégorie *</label>
               <input
+                ref={nameInputRef}
                 id="name"
                 className="input"
                 placeholder="ex: Nos Milkshakes & Smoothies"

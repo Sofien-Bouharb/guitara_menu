@@ -38,26 +38,6 @@ function AdminLayoutInner({ children }: { children: React.ReactNode }) {
           <BrandLogo size="md" variant="light" />
         </div>
 
-        {/* Mode Indicator Badge */}
-        <div className="sidebar-mode-badge">
-          <div className="sidebar-mode-header">
-            <span className="sidebar-mode-header-label">
-              <CheckCircle2 size={14} />
-              Mode Statique Démo
-            </span>
-          </div>
-          <p className="sidebar-mode-desc">
-            Testez l&apos;interface librement. Vos modifications s&apos;enregistrent en mémoire.
-          </p>
-          <button
-            onClick={() => setIsStaticMode(!isStaticMode)}
-            className="sidebar-mode-btn"
-          >
-            <Database size={13} />
-            <span>{isStaticMode ? "Connecter à Supabase" : "Mode Statique Actif"}</span>
-          </button>
-        </div>
-
         {/* Desktop Navigation Links */}
         <nav className="nav" aria-label="Navigation Administrateur">
           {navItems.map((item) => {
@@ -106,18 +86,8 @@ function AdminLayoutInner({ children }: { children: React.ReactNode }) {
         <header className="top-header top-header--desktop">
           <div className="top-header-left">
             <span className="header-context-badge">
-              Université Guitara Space • Admin Panel
+              Guitara • Interface Administrateur
             </span>
-          </div>
-
-          <div className="top-header-right">
-            <button
-              onClick={() => setIsStaticMode(!isStaticMode)}
-              className={`mode-toggle-btn ${isStaticMode ? "mode-toggle-btn--static" : "mode-toggle-btn--live"}`}
-            >
-              <Database size={13} />
-              <span>{isStaticMode ? "Mode Statique UI" : "Supabase Connecté"}</span>
-            </button>
           </div>
         </header>
 
