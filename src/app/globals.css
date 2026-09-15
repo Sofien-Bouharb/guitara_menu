@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
 
 :root {
-  /* Palette Tokens: #F0E3D2 #D6C0A3 #B99A73 #8A6848 #3A2A1C */
+  /* Palette Tokens */
   --color-cream: #f0e3d2;
   --color-sand: #d6c0a3;
   --color-bronze: #b99a73;
@@ -34,7 +34,7 @@
   --promo: #8e24aa;
   --promo-bg: #f3e5f5;
 
-  /* Radii & Breathable Shadows */
+  /* Radii & Shadows */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 18px;
@@ -47,6 +47,10 @@
 
   --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
 
 *,
 *:before,
@@ -104,7 +108,9 @@ img {
   max-width: 100%;
 }
 
-/* Scrollbar utilities */
+/* ==========================================================================
+   Scrollbar Utilities
+   ========================================================================== */
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -447,7 +453,7 @@ img {
   left: 0;
   right: 0;
   z-index: 50;
-  height: calc(62px + env(safe-area-inset-bottom));
+  min-height: 62px;
   background: var(--color-espresso);
   border-top: 1px solid rgba(214, 192, 163, 0.3);
   display: flex;
@@ -711,6 +717,48 @@ img {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+/* ==========================================================================
+   Items Page - Desktop Form
+   ========================================================================== */
+
+/*
+ * On laptop/desktop, the item form gets its own scroll area.
+ * This prevents the form from extending beyond the viewport and
+ * forcing the user to scroll all the way down the items list
+ * just to reach the Enregistrer button.
+ *
+ * Mobile/tablet keep normal page scrolling.
+ */
+
+@media (min-width: 1024px) {
+  .items-form-panel {
+    position: sticky;
+    top: 84px;
+    align-self: start;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+  }
+
+  .items-form-panel::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .items-form-panel::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .items-form-panel::-webkit-scrollbar-thumb {
+    background: var(--color-sand);
+    border-radius: var(--radius-full);
+  }
+
+  .items-form-panel::-webkit-scrollbar-thumb:hover {
+    background: var(--color-bronze);
+  }
 }
 
 /* ==========================================================================
@@ -982,7 +1030,9 @@ input:checked + .slider:before {
   gap: 10px;
 }
 
-/* Badges & Cards */
+/* ==========================================================================
+   Badges & Cards
+   ========================================================================== */
 
 .badge {
   display: inline-flex;
@@ -2555,4 +2605,24 @@ input:checked + .slider:before {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ==========================================================================
+   Mobile-only New Category Button
+   ========================================================================== */
+
+.mobile-only-new-category {
+  display: none;
+}
+
+@media (max-width: 639px) {
+  .mobile-only-new-category {
+    display: inline-flex;
+  }
+}
+
+/* Category form scroll positioning */
+
+.category-form-panel {
+  scroll-margin-top: 78px;
 }

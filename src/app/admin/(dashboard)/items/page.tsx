@@ -334,10 +334,9 @@ export default function ItemsPage() {
         return;
       }
     } else {
-
-    /*
-     * CREATE NEW ITEM
-     */
+      /*
+       * CREATE NEW ITEM
+       */
       try {
         const newItem = await createItem(payload);
 
@@ -646,7 +645,7 @@ export default function ItemsPage() {
         </section>
 
         {/* Right Column: Form */}
-        <section className="panel">
+        <section className="panel items-form-panel">
           <div className="panel-header">
             <div>
               <h2>{form.id ? "Modifier le Produit" : "Nouveau Produit"}</h2>

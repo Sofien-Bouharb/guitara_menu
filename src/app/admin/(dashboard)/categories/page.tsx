@@ -94,14 +94,22 @@ export default function CategoriesPage() {
     setSuccess(null);
 
     requestAnimationFrame(() => {
-      formPanelRef.current?.scrollIntoView({
+      const element = formPanelRef.current;
+
+      if (!element) return;
+
+      const headerOffset = 70;
+
+      const elementTop = element.getBoundingClientRect().top + window.scrollY;
+
+      window.scrollTo({
+        top: Math.max(0, elementTop - headerOffset),
         behavior: "smooth",
-        block: "start",
       });
 
       setTimeout(() => {
         nameInputRef.current?.focus();
-      }, 400);
+      }, 500);
     });
   }
 
@@ -228,7 +236,7 @@ export default function CategoriesPage() {
         description="Gérez les sections principales (Cafés, Milkshakes, Crêpes...)."
         action={
           <button
-            className="btn btn-primary"
+            className="btn btn-primary mobile-only-new-category"
             onClick={handleNewCategory}
             type="button"
           >
@@ -240,7 +248,7 @@ export default function CategoriesPage() {
 
       <div className="grid grid-split">
         {/* Left Column: Categories List */}
-        <section ref={formPanelRef} className="panel">
+        <section className="panel">
           <div className="section-header">
             <div>
               <h2 className="section-title">
@@ -344,7 +352,7 @@ export default function CategoriesPage() {
         </section>
 
         {/* Right Column: Form */}
-        <section className="panel">
+        <section ref={formPanelRef} className="panel category-form-panel">
           <div className="panel-header">
             <div>
               <h2>
