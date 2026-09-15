@@ -86,12 +86,6 @@ export default function AdminDashboardPage() {
         <PageHeader
           title="Tableau de Bord Admin"
           description="Vue d'ensemble et gestion rapide de votre espace café."
-          action={
-            <Link href="/admin/items" className="btn btn-primary">
-              <Plus size={15} />
-              <span>Nouveau Produit</span>
-            </Link>
-          }
         />
 
         <div className="grid grid-cols-4">
@@ -100,6 +94,7 @@ export default function AdminDashboardPage() {
               <div className="kpi-card-header">
                 <span className="kpi-card-label">Chargement...</span>
               </div>
+              Produit
               <div className="kpi-card-value">—</div>
             </div>
           ))}
@@ -123,12 +118,6 @@ export default function AdminDashboardPage() {
       <PageHeader
         title="Tableau de Bord Admin"
         description="Vue d'ensemble et gestion rapide de votre espace café."
-        action={
-          <Link href="/admin/items" className="btn btn-primary">
-            <Plus size={15} />
-            <span>Nouveau Produit</span>
-          </Link>
-        }
       />
 
       {/* KPI Stats Cards Grid */}

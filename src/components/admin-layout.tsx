@@ -96,7 +96,7 @@ function AdminLayoutInner({ children }: { children: React.ReactNode }) {
       {/* Main Container */}
       <div className="main-container">
         {/* Mobile Navigation Header */}
-        <MobileNav />
+        <MobileNav onLogout={handleLogout} />
 
         {/* Desktop Header Top Bar */}
         <header className="top-header top-header--desktop">

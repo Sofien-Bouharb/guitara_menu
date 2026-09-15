@@ -9,18 +9,20 @@ import {
   Utensils,
   Bell,
   Settings,
-  Database,
+  LogOut,
 } from "lucide-react";
 import { BrandLogo } from "./brand-logo";
-import { useAdminStore } from "@/lib/store-context";
 
-export function MobileNav() {
+type MobileNavProps = {
+  onLogout: () => void | Promise<void>;
+};
+
+export function MobileNav({ onLogout }: MobileNavProps) {
   const pathname = usePathname();
-  const { isStaticMode, setIsStaticMode } = useAdminStore();
 
   const navItems = [
     { href: "/admin", label: "Accueil", icon: LayoutDashboard },
-    { href: "/admin/categories", label: "Sections", icon: FolderTree },
+    { href: "/admin/categories", label: "Catégories", icon: FolderTree },
     { href: "/admin/items", label: "Articles", icon: Utensils },
     { href: "/admin/announcements", label: "Annonces", icon: Bell },
     { href: "/admin/settings", label: "Réglages", icon: Settings },
@@ -28,17 +30,32 @@ export function MobileNav() {
 
   return (
     <>
-      {/* FIXED TOP HEADER (Fixed in place when scrolling) */}
+      {/* Fixed mobile top header */}
       <header className="top-header top-header--mobile">
         <div className="top-header-left">
           <BrandLogo size="sm" showSubtitle={false} compactMobile={true} />
         </div>
+
+        {/* Mobile Logout */}
+        <button
+          type="button"
+          className="mobile-header-logout"
+          onClick={onLogout}
+          title="Déconnexion"
+          aria-label="Déconnexion"
+        >
+          <LogOut size={19} />
+        </button>
       </header>
 
-      {/* FIXED BOTTOM NAVIGATION BAR */}
-      <nav className="mobile-bottom-nav">
+      {/* Fixed mobile bottom navigation */}
+      <nav
+        className="mobile-bottom-nav"
+        aria-label="Navigation mobile administrateur"
+      >
         {navItems.map((item) => {
           const Icon = item.icon;
+
           const isActive =
             pathname === item.href ||
             (item.href !== "/admin" && pathname.startsWith(item.href));

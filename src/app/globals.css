@@ -17,7 +17,6 @@
   --text-muted: #6e5c4e;
   --border-color: #d6c0a3;
   --border-subtle: #e8dccb;
-
   --primary: #8a6848;
   --primary-hover: #725337;
   --primary-light: #f0e3d2;
@@ -71,7 +70,7 @@ body {
   background: var(--bg);
   color: var(--text-main);
   font-family:
-    var(--font-plus-jakarta),
+    "Plus Jakarta Sans",
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
@@ -106,16 +105,18 @@ img {
 }
 
 /* Scrollbar utilities */
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
 /* ==========================================================================
-   Fixed Navigation Architecture (Top & Bottom Stay Fixed In Place)
+   Fixed Navigation Architecture
    ========================================================================== */
 
 .admin-shell {
@@ -136,7 +137,10 @@ img {
   }
 }
 
-/* Desktop Sidebar */
+/* ==========================================================================
+   Desktop Sidebar
+   ========================================================================== */
+
 .sidebar {
   display: none;
 }
@@ -167,6 +171,7 @@ img {
 }
 
 /* Sidebar Mode Indicator */
+
 .sidebar-mode-badge {
   background: rgba(138, 104, 72, 0.2);
   border: 1px solid rgba(185, 154, 115, 0.3);
@@ -224,6 +229,7 @@ img {
 }
 
 /* Desktop Navigation Links */
+
 .nav {
   display: flex;
   flex-direction: column;
@@ -253,6 +259,8 @@ img {
   color: #ffffff;
   box-shadow: 0 4px 14px rgba(138, 104, 72, 0.35);
 }
+
+/* Sidebar Footer */
 
 .sidebar-footer {
   margin-top: auto;
@@ -294,7 +302,10 @@ img {
   color: white;
 }
 
-/* FIXED TOP HEADER (Stays 100% in place when scrolling) */
+/* ==========================================================================
+   Fixed Top Header
+   ========================================================================== */
+
 .top-header {
   position: fixed;
   top: 0;
@@ -355,7 +366,39 @@ img {
   flex-shrink: 0;
 }
 
+/* Mobile Logout Button */
+
+.mobile-header-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--color-coffee);
+  transition: var(--transition);
+}
+
+.mobile-header-logout:hover {
+  background: var(--color-cream);
+  color: var(--color-espresso);
+  border-color: var(--color-bronze);
+}
+
+.mobile-header-logout:active {
+  transform: scale(0.96);
+}
+
+.mobile-header-logout:focus-visible {
+  outline: 2px solid var(--color-coffee);
+  outline-offset: 2px;
+}
+
 /* Desktop header badge */
+
 .header-context-badge {
   font-size: 12px;
   font-weight: 600;
@@ -366,7 +409,8 @@ img {
   border: 1px solid var(--color-sand);
 }
 
-/* Mode Toggle Button (shared between mobile header and desktop header) */
+/* Mode Toggle Button */
+
 .mode-toggle-btn {
   padding: 6px 12px;
   border-radius: var(--radius-full);
@@ -393,7 +437,10 @@ img {
   border-color: #a5d6a7;
 }
 
-/* FIXED BOTTOM NAVIGATION BAR (Stays 100% in place on Mobile) */
+/* ==========================================================================
+   Fixed Bottom Navigation
+   ========================================================================== */
+
 .mobile-bottom-nav {
   position: fixed;
   bottom: 0;
@@ -443,7 +490,10 @@ img {
   transform: translateY(-1px);
 }
 
-/* Main Content Wrapper (With Padding Offsets for Fixed Bars) */
+/* ==========================================================================
+   Main Content Wrapper
+   ========================================================================== */
+
 .main-container {
   flex: 1;
   display: flex;
@@ -488,7 +538,7 @@ img {
 }
 
 /* ==========================================================================
-   Page Content Vertical Stacking
+   Page Content
    ========================================================================== */
 
 .page-content {
@@ -504,7 +554,7 @@ img {
 }
 
 /* ==========================================================================
-   Page Headers & Breathable Spacing
+   Page Headers
    ========================================================================== */
 
 .page-header {
@@ -551,7 +601,7 @@ img {
 }
 
 /* ==========================================================================
-   Grids & Panels (Generous Breathable Padding & Gaps)
+   Grids & Panels
    ========================================================================== */
 
 .grid {
@@ -743,6 +793,7 @@ img {
 }
 
 /* Form controls */
+
 .form {
   display: flex;
   flex-direction: column;
@@ -774,6 +825,7 @@ img {
     flex-direction: row;
     gap: 12px;
   }
+
   .form-row > * {
     flex: 1;
   }
@@ -825,6 +877,7 @@ img {
 }
 
 /* Search wrapper */
+
 .search-wrapper {
   position: relative;
   width: 100%;
@@ -852,6 +905,7 @@ img {
 }
 
 /* iOS Style Switch Toggle */
+
 .switch {
   position: relative;
   display: inline-block;
@@ -900,6 +954,7 @@ input:checked + .slider:before {
 }
 
 /* Checkbox */
+
 .checkbox-label {
   display: flex;
   align-items: center;
@@ -928,6 +983,7 @@ input:checked + .slider:before {
 }
 
 /* Badges & Cards */
+
 .badge {
   display: inline-flex;
   align-items: center;
@@ -967,7 +1023,7 @@ input:checked + .slider:before {
 }
 
 /* ==========================================================================
-   Status Messages (Error / Success)
+   Status Messages
    ========================================================================== */
 
 .error {
@@ -993,7 +1049,7 @@ input:checked + .slider:before {
 }
 
 /* ==========================================================================
-   KPI Stat Cards (Dashboard)
+   KPI Stat Cards
    ========================================================================== */
 
 .kpi-card {
@@ -1099,7 +1155,7 @@ input:checked + .slider:before {
 }
 
 /* ==========================================================================
-   Stock Row (Dashboard quick toggle)
+   Stock Row
    ========================================================================== */
 
 .stock-list {
@@ -1205,7 +1261,8 @@ input:checked + .slider:before {
   color: var(--text-muted);
 }
 
-/* Panel Link (See All) */
+/* Panel Link */
+
 .panel-link {
   font-size: 12px;
   font-weight: 700;
@@ -1222,7 +1279,7 @@ input:checked + .slider:before {
 }
 
 /* ==========================================================================
-   Shortcut Cards (Dashboard)
+   Shortcut Cards
    ========================================================================== */
 
 .shortcuts-grid {
@@ -1260,6 +1317,7 @@ input:checked + .slider:before {
 }
 
 /* Status Info Card */
+
 .status-info-card {
   display: flex;
   align-items: center;
@@ -1282,6 +1340,7 @@ input:checked + .slider:before {
 }
 
 /* Right column stacking */
+
 .side-stack {
   display: flex;
   flex-direction: column;
@@ -1400,6 +1459,7 @@ input:checked + .slider:before {
 }
 
 /* Section header with count */
+
 .section-header {
   display: flex;
   flex-direction: column;
@@ -1428,6 +1488,7 @@ input:checked + .slider:before {
 }
 
 /* Empty state */
+
 .empty-state {
   padding: 24px;
   text-align: center;
@@ -1442,7 +1503,6 @@ input:checked + .slider:before {
    Items Page
    ========================================================================== */
 
-/* Filter pills */
 .filter-pills {
   display: flex;
   gap: 8px;
@@ -1480,7 +1540,8 @@ input:checked + .slider:before {
   box-shadow: 0 2px 8px rgba(138, 104, 72, 0.3);
 }
 
-/* Item cards (spacious) */
+/* Item cards */
+
 .item-list {
   display: flex;
   flex-direction: column;
@@ -1697,6 +1758,7 @@ input:checked + .slider:before {
 }
 
 /* Variant tags */
+
 .variant-tags {
   display: flex;
   flex-wrap: wrap;
@@ -1718,6 +1780,7 @@ input:checked + .slider:before {
 }
 
 /* Variant Builder */
+
 .variant-builder {
   display: flex;
   flex-direction: column;
@@ -1851,6 +1914,7 @@ input:checked + .slider:before {
 }
 
 /* Announcement Preview */
+
 .announcement-preview-label {
   font-size: 12px;
   font-weight: 700;
@@ -2006,6 +2070,7 @@ input:checked + .slider:before {
 }
 
 .login-card {
+  position: relative;
   width: 100%;
   max-width: 420px;
   background: white;
@@ -2125,6 +2190,7 @@ input:checked + .slider:before {
 }
 
 /* Logo image sizes */
+
 .brand-logo-img {
   height: auto;
   object-fit: contain;
@@ -2165,6 +2231,7 @@ input:checked + .slider:before {
 }
 
 /* Fallback icon badge */
+
 .brand-logo-fallback {
   display: flex;
   align-items: center;
@@ -2223,6 +2290,7 @@ input:checked + .slider:before {
 }
 
 /* Brand text */
+
 .brand-logo-text {
   display: flex;
   flex-direction: column;
@@ -2336,7 +2404,10 @@ input:checked + .slider:before {
   }
 }
 
-/* Form row for fee + generate button */
+/* ==========================================================================
+   Additional Form Components
+   ========================================================================== */
+
 .fee-row {
   display: flex;
   flex-direction: column;
@@ -2347,9 +2418,11 @@ input:checked + .slider:before {
   .fee-row {
     flex-direction: row;
   }
+
   .fee-row .input {
     flex: 1;
   }
+
   .fee-row .btn {
     flex-shrink: 0;
   }
@@ -2376,7 +2449,7 @@ input:checked + .slider:before {
   margin: 0;
   border: none;
   background: transparent;
-  color: var(--color-muted);
+  color: var(--text-muted);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2391,148 +2464,37 @@ input:checked + .slider:before {
 }
 
 .password-toggle:focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-coffee);
   outline-offset: 2px;
 }
 
-.login-card {
-  position: relative;
-}
-
-.login-error-popup {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  right: 20px;
-  z-index: 10;
-
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-
-  padding: 12px 12px 12px 14px;
-
-  background: #fff1f2;
-  border: 1px solid #fecdd3;
-  border-left: 4px solid #dc2626;
-  border-radius: 10px;
-
-  color: #991b1b;
-
-  box-shadow: 0 8px 20px rgba(127, 29, 29, 0.1);
-
-  animation: login-error-slide-in 0.25s ease-out;
-}
-
-.login-error-icon {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 28px;
-  height: 28px;
-
-  color: #dc2626;
-  background: #fee2e2;
-  border-radius: 50%;
-}
-
-.login-error-content {
-  min-width: 0;
-  flex: 1;
-
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.login-error-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: #991b1b;
-}
-
-.login-error-message {
-  font-size: 12px;
-  line-height: 1.4;
-  color: #b91c1c;
-}
-
-.login-error-close {
-  flex-shrink: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 28px;
-  height: 28px;
-
-  padding: 0;
-  border: none;
-  border-radius: 6px;
-
-  background: transparent;
-  color: #b91c1c;
-
-  cursor: pointer;
-}
-
-.login-error-close:hover {
-  background: #fee2e2;
-  color: #7f1d1d;
-}
-
-.login-error-close:focus-visible {
-  outline: 2px solid #dc2626;
-  outline-offset: 2px;
-}
-
-@keyframes login-error-slide-in {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* ==========================================================================
+   Login Error Popup
+   ========================================================================== */
 
 .login-error-popup {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-
   width: 100%;
   margin: 20px 0;
-
   padding: 12px 12px 12px 14px;
-
   background: #fff1f2;
   border: 1px solid #fecdd3;
   border-left: 4px solid #dc2626;
   border-radius: 10px;
-
   color: #991b1b;
-
   box-shadow: 0 6px 16px rgba(127, 29, 29, 0.08);
-
   animation: login-error-slide-in 0.25s ease-out;
 }
 
 .login-error-icon {
   flex-shrink: 0;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 28px;
   height: 28px;
-
   color: #dc2626;
   background: #fee2e2;
   border-radius: 50%;
@@ -2541,7 +2503,6 @@ input:checked + .slider:before {
 .login-error-content {
   min-width: 0;
   flex: 1;
-
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -2561,21 +2522,16 @@ input:checked + .slider:before {
 
 .login-error-close {
   flex-shrink: 0;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 28px;
   height: 28px;
-
   padding: 0;
   border: none;
   border-radius: 6px;
-
   background: transparent;
   color: #b91c1c;
-
   cursor: pointer;
 }
 
